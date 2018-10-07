@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import com.bonnetrouge.rhymetime.R
 import dagger.android.support.DaggerFragment
 
-class SandboxFragment : DaggerFragment() {
+class SearchFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_sandbox, container, false)
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
     companion object {
-        fun getInstance(): SandboxFragment {
-            return SandboxFragment()
+        fun getInstance(): SearchFragment {
+            return SearchFragment()
         }
 
-        val TAG = SandboxFragment::class.java.name!!
+        val TAG = SearchFragment::class.java.name!!
     }
 }
