@@ -4,6 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:id="@+id/root"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	tools:context=".MainActivity">
 
@@ -18,6 +19,9 @@
 		android:layout_width="match_parent"
 		android:layout_height="?attr/actionBarSize"
 		android:layout_gravity="bottom"
+		app:backgroundTint="@android:color/black"
+		app:fabCradleRoundedCornerRadius="24dp"
+		app:navigationIcon="@drawable/ic_menu_white_24dp"
 		/>
 
 	<android.support.design.widget.FloatingActionButton
@@ -27,20 +31,24 @@
 		app:layout_anchor="@id/appBar"
 		/>
 
-	<!--<FrameLayout-->
-		<!--android:id="@+id/bottomDrawer"-->
-		<!--android:layout_width="match_parent"-->
-		<!--android:layout_height="wrap_content"-->
-		<!--android:elevation="16dp"-->
-		<!--app:behavior_hideable="true"-->
-		<!--app:layout_behavior="@string/bottom_sheet_behavior"-->
-		<!--&gt;-->
+	<FrameLayout
+		android:id="@+id/bottomDrawer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:elevation="16dp"
+		app:behavior_hideable="true"
+		app:layout_behavior="@string/bottom_sheet_behavior"
+		>
 
-		<!--<android.support.design.widget.NavigationView-->
-			<!--android:id="@+id/navView"-->
-			<!--android:layout_width="match_parent"-->
-			<!--android:layout_height="wrap_content"-->
-			<!--/>-->
-			<!--&lt;!&ndash;app:menu="@menu/menu_bottom_nav"&ndash;&gt;-->
-	<!--</FrameLayout>-->
+		<android.support.design.widget.NavigationView
+			android:id="@+id/navView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/rounded_top_corner"
+			app:menu="@menu/main_bottom_nav_menu"
+			app:elevation="16dp"
+			app:itemTextColor="@android:color/white"
+			/>
+
+	</FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
