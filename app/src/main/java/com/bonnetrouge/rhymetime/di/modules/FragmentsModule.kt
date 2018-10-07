@@ -5,6 +5,7 @@ import com.bonnetrouge.rhymetime.di.components.SandboxFragmentSubcomponent
 import com.bonnetrouge.rhymetime.di.components.SearchFragmentSubcomponent
 import com.bonnetrouge.rhymetime.fragments.ChallengeFragment
 import com.bonnetrouge.rhymetime.fragments.SandboxFragment
+import com.bonnetrouge.rhymetime.fragments.SearchFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.AndroidInjector
@@ -13,7 +14,8 @@ import dagger.multibindings.IntoMap
 
 @Module(subcomponents = [
     ChallengeFragmentSubcomponent::class,
-    SandboxFragmentSubcomponent::class
+    SandboxFragmentSubcomponent::class,
+    SearchFragmentSubcomponent::class
 ])
 abstract class FragmentsModule {
     @Binds
@@ -31,7 +33,7 @@ abstract class FragmentsModule {
 
     @Binds
     @IntoMap
-    @FragmentKey(SandboxFragment::class)
+    @FragmentKey(SearchFragment::class)
     abstract fun bindSearchFragmentInjectorFactory(builder: SearchFragmentSubcomponent.Builder):
             AndroidInjector.Factory<out android.support.v4.app.Fragment>
 }

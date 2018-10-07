@@ -3,6 +3,7 @@ package com.bonnetrouge.rhymetime.ext
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import com.bonnetrouge.rhymetime.R
 
 inline fun AppCompatActivity.fragmentTransaction(addToBackStack: Boolean = false, tag: String? = null, swapInfo: FragmentTransaction.() -> Unit) {
     val transaction = supportFragmentManager.beginTransaction()
@@ -19,9 +20,12 @@ fun AppCompatActivity.swapFragment(
         fragment: Fragment
 ) {
     val transaction = supportFragmentManager.beginTransaction()
+    val oldFragment = supportFragmentManager.findFragmentById(containerId)
     if (supportFragmentManager.findFragmentByTag(tag) == null) {
         transaction.add(containerId, fragment, tag)
     }
+    oldFragment?.let { transaction.hide(it) }
+    transaction.setCustomAnimations(R.anim.grow_in, R.anim.hide)
     transaction.show(fragment)
     transaction.commit()
 }

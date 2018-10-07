@@ -16,7 +16,7 @@ interface ChallengeFragmentSubcomponent : AndroidInjector<ChallengeFragment> {
     @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<ChallengeFragment>()
 }
 
-@Subcomponent
+@Subcomponent()
 interface SearchFragmentSubcomponent : AndroidInjector<SearchFragment> {
     @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<SearchFragment>()
 }

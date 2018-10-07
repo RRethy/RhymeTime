@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
 		android:id="@+id/menu_challenges"
-		android:title="Challenges"
+		android:title="@string/challenges"
 		/>
 	<item
 		android:id="@+id/menu_search"
-		android:title="Search"
+		android:title="@string/search"
 		/>
 	<item
 		android:id="@+id/menu_sandbox"
-		android:title="Sandbox"
+		android:title="@string/sandbox"
 		/>
 </menu>
