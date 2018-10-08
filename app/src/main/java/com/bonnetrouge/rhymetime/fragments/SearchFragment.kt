@@ -46,7 +46,19 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     }
 
     override fun onDebounced(s: CharSequence) {
-        Log.d("Quman", s.toString())
+        searchViewModel.getCompletionResults(s.toString()) {
+            if (searchEditText.text.toString() == "") {
+                suggestionsAdapter.submitList(null)
+                return@getCompletionResults
+            }
+
+            if (it == null) {
+                Log.d("Quman", "FAIL")
+            } else {
+                Log.d("Quman", it.toString())
+                suggestionsAdapter.submitList(it)
+            }
+        }
     }
 
     companion object {

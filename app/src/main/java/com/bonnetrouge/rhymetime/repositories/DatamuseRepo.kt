@@ -1,7 +1,8 @@
 package com.bonnetrouge.rhymetime.repositories
 
-import javax.inject.Singleton
+import com.bonnetrouge.rhymetime.models.Suggestion
 
 interface DatamuseRepo {
 
+    fun getCompletionResults(s: String, cb: (List<Suggestion>?) -> Unit)
 }
