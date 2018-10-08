@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +15,14 @@ import com.bonnetrouge.rhymetime.commons.DebounceTextWatcher
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.ext.observe
+import com.bonnetrouge.rhymetime.listeners.RVClickListener
+import com.bonnetrouge.rhymetime.models.Suggestion
 import com.bonnetrouge.rhymetime.viewmodels.SearchViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
-class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener {
+class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener, RVClickListener<Suggestion> {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
@@ -41,10 +44,6 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         searchEditText.addTextChangedListener(debounceTextWatcher)
@@ -55,12 +54,20 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
         recyclerView.adapter = suggestionsAdapter
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_search, container, false)
+    }
+
     override fun onDebounced(s: CharSequence) {
         searchViewModel.onSearchTextChanged(s.toString())
     }
 
     override fun onPreDebounce(s: CharSequence) {
         if (s.isEmpty()) suggestionsAdapter.submitList(null)
+    }
+
+    override fun onItemClick(data: Suggestion, index: Int) {
+        Log.d("Quman", "$data: $index")
     }
 
     companion object {
