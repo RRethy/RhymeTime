@@ -1,5 +1,8 @@
 package com.bonnetrouge.rhymetime.ext
 
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
@@ -35,3 +38,10 @@ fun AppCompatActivity.swapFragment(
  * Warning: Only use for objects accessed on main thread
  */
 fun <T> lazyAndroid(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
+
+/** Syntax helper to convert
+ * data.observe(this, Observer<Int> { ... })
+ * to
+ * data.observe(this) { ... }
+ */
+fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T?) -> Unit) = observe(owner, Observer(observer))

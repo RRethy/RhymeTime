@@ -55,6 +55,10 @@ dependencies {
     // moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation "com.squareup.retrofit2:converter-moshi:$moshi_converter_version"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
 }
 
 kotlin {

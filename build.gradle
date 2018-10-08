@@ -7,6 +7,7 @@ buildscript {
     ext.support_version = '28.0.0'
     ext.coroutines_version = '0.30.1'
     ext.lifecycle_version = '1.1.1'
+    ext.room_version = '1.1.1'
     ext.retrofit_version = '2.4.0'
     ext.moshi_version = '1.7.0'
     ext.moshi_converter_version = '2.4.0'

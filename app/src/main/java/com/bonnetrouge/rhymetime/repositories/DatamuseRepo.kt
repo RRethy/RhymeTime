@@ -1,8 +1,10 @@
 package com.bonnetrouge.rhymetime.repositories
 
+import android.arch.lifecycle.LiveData
 import com.bonnetrouge.rhymetime.models.Suggestion
 
 interface DatamuseRepo {
+    fun getSuggestionLiveData(): LiveData<List<Suggestion>>
 
-    fun getCompletionResults(s: String, cb: (List<Suggestion>?) -> Unit)
+    fun fetchSuggestions(s: String)
 }
