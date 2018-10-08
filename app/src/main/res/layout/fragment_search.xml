@@ -16,11 +16,25 @@
 		app:boxCornerRadiusBottomStart="24dp"
 		app:boxCornerRadiusTopEnd="24dp"
 		app:boxCornerRadiusTopStart="24dp"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
 		>
 		<android.support.design.widget.TextInputEditText
 			android:id="@+id/searchEditText"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:hint="Searchit"/>
+			android:hint="@string/search"/>
 	</android.support.design.widget.TextInputLayout>
+
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/recyclerView"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:padding="16dp"
+		app:layout_constraintTop_toBottomOf="@id/searchContainer"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		/>
 </android.support.constraint.ConstraintLayout>
