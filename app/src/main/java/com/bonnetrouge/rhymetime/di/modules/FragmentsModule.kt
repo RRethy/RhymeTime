@@ -3,9 +3,11 @@ package com.bonnetrouge.rhymetime.di.modules
 import com.bonnetrouge.rhymetime.di.components.ChallengeFragmentSubcomponent
 import com.bonnetrouge.rhymetime.di.components.SandboxFragmentSubcomponent
 import com.bonnetrouge.rhymetime.di.components.SearchFragmentSubcomponent
+import com.bonnetrouge.rhymetime.di.components.SingleWordSubcomponent
 import com.bonnetrouge.rhymetime.fragments.ChallengeFragment
 import com.bonnetrouge.rhymetime.fragments.SandboxFragment
 import com.bonnetrouge.rhymetime.fragments.SearchFragment
+import com.bonnetrouge.rhymetime.fragments.SingleWordFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.AndroidInjector
@@ -15,7 +17,8 @@ import dagger.multibindings.IntoMap
 @Module(subcomponents = [
     ChallengeFragmentSubcomponent::class,
     SandboxFragmentSubcomponent::class,
-    SearchFragmentSubcomponent::class
+    SearchFragmentSubcomponent::class,
+    SingleWordSubcomponent::class
 ])
 abstract class FragmentsModule {
     @Binds
@@ -35,5 +38,11 @@ abstract class FragmentsModule {
     @IntoMap
     @FragmentKey(SearchFragment::class)
     abstract fun bindSearchFragmentInjectorFactory(builder: SearchFragmentSubcomponent.Builder):
+            AndroidInjector.Factory<out android.support.v4.app.Fragment>
+
+    @Binds
+    @IntoMap
+    @FragmentKey(SingleWordFragment::class)
+    abstract fun bindSingleWordFragment(build: SingleWordSubcomponent.Builder):
             AndroidInjector.Factory<out android.support.v4.app.Fragment>
 }

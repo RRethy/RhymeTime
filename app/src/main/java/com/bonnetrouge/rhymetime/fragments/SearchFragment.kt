@@ -3,6 +3,7 @@ package com.bonnetrouge.rhymetime.fragments
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -15,6 +16,7 @@ import com.bonnetrouge.rhymetime.commons.DebounceTextWatcher
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.ext.observe
+import com.bonnetrouge.rhymetime.ext.swapFragment
 import com.bonnetrouge.rhymetime.listeners.RVClickListener
 import com.bonnetrouge.rhymetime.models.Suggestion
 import com.bonnetrouge.rhymetime.viewmodels.SearchViewModel
@@ -31,7 +33,7 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     }
 
     private val debounceTextWatcher by lazyAndroid { DebounceTextWatcher(this) }
-    private val suggestionsAdapter by lazyAndroid { SearchAdapter() }
+    private val suggestionsAdapter by lazyAndroid { SearchAdapter(this) }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -67,7 +69,12 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     }
 
     override fun onItemClick(data: Suggestion, index: Int) {
-        Log.d("Quman", "$data: $index")
+        (activity as AppCompatActivity).swapFragment(
+                R.id.fragmentContainer,
+                SingleWordFragment.TAG,
+                SingleWordFragment.getInstance(data.word),
+                true
+        )
     }
 
     companion object {

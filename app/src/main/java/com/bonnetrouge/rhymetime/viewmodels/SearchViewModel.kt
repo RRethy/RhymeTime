@@ -13,9 +13,7 @@ class SearchViewModel @Inject constructor(
 ) : ViewModel() {
 
     val suggestionsLiveData by lazyAndroid { MediatorLiveData<List<Suggestion>?>().apply {
-        addSource(datamuseRepo.getSuggestionLiveData()) {
-            value = it
-        }
+        addSource(datamuseRepo.getSuggestionLiveData()) { value = it }
     }}
 
     fun onSearchTextChanged(s: String) = datamuseRepo.fetchSuggestions(s)

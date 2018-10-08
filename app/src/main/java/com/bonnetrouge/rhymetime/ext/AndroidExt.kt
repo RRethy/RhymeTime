@@ -20,7 +20,8 @@ inline fun AppCompatActivity.fragmentTransaction(addToBackStack: Boolean = false
 fun AppCompatActivity.swapFragment(
         containerId: Int,
         tag: String,
-        fragment: Fragment
+        fragment: Fragment,
+        addToBackStack: Boolean = false
 ) {
     val transaction = supportFragmentManager.beginTransaction()
     val oldFragment = supportFragmentManager.findFragmentById(containerId)
@@ -30,6 +31,9 @@ fun AppCompatActivity.swapFragment(
     oldFragment?.let { transaction.hide(it) }
     transaction.setCustomAnimations(R.anim.grow_in, R.anim.hide)
     transaction.show(fragment)
+    if (addToBackStack) {
+        transaction.addToBackStack(tag)
+    }
     transaction.commit()
 }
 
