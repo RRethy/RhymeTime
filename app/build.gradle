@@ -39,6 +39,15 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
+    // kotlin coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+
     // Stetho
     implementation "com.facebook.stetho:stetho:$stetho_version"
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }

@@ -3,6 +3,24 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	>
-
+	
+	<android.support.design.widget.TextInputLayout
+		android:id="@+id/searchContainer"
+		android:layout_width="match_parent"
+		android:layout_height="56dp"
+		android:layout_margin="16dp"
+		style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+		app:boxCornerRadiusBottomEnd="24dp"
+		app:boxCornerRadiusBottomStart="24dp"
+		app:boxCornerRadiusTopEnd="24dp"
+		app:boxCornerRadiusTopStart="24dp"
+		>
+		<android.support.design.widget.TextInputEditText
+			android:id="@+id/searchEditText"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:hint="Searchit"/>
+	</android.support.design.widget.TextInputLayout>
 </android.support.constraint.ConstraintLayout>
