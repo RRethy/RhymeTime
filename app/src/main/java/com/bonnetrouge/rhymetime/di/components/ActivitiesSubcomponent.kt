@@ -1,6 +1,6 @@
 package com.bonnetrouge.rhymetime.di.components
 
-import com.bonnetrouge.rhymetime.MainActivity
+import com.bonnetrouge.rhymetime.activities.MainActivity
 import com.bonnetrouge.rhymetime.di.modules.FragmentsModule
 import dagger.Subcomponent
 import dagger.android.AndroidInjector

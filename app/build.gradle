@@ -30,6 +30,10 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
+    // ViewMode/LiveData/Lifecycle
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
+
     // Material Components
     implementation "com.android.support:design:$support_version"
 

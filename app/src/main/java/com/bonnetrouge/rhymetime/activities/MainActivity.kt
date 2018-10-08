@@ -1,7 +1,8 @@
-package com.bonnetrouge.rhymetime
+package com.bonnetrouge.rhymetime.activities
 
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import com.bonnetrouge.rhymetime.R
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.ext.swapFragment
 import com.bonnetrouge.rhymetime.fragments.ChallengeFragment
