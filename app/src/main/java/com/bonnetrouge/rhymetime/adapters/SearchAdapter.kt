@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.bonnetrouge.rhymetime.R
 import com.bonnetrouge.rhymetime.listeners.RVClickListener
-import com.bonnetrouge.rhymetime.models.Suggestion
+import com.bonnetrouge.rhymetime.models.WordInfo
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.view_holder_search.*
 
-class SearchAdapter(val listener: RVClickListener<Suggestion>) : ListAdapter<Suggestion, SearchAdapter.SearchViewHolder>(Suggestion.DIFF_CALLBACK) {
+class SearchAdapter(val listener: RVClickListener<WordInfo>) : ListAdapter<WordInfo, SearchAdapter.SearchViewHolder>(WordInfo.DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         return SearchViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_holder_search, parent, false))
@@ -26,8 +26,8 @@ class SearchAdapter(val listener: RVClickListener<Suggestion>) : ListAdapter<Sug
             containerView.setOnClickListener { listener.onItemClick(getItem(adapterPosition), adapterPosition) }
         }
 
-        fun bind(suggestion: Suggestion) {
-            result.text = suggestion.word
+        fun bind(wordInfo: WordInfo) {
+            result.text = wordInfo.word
         }
     }
 }

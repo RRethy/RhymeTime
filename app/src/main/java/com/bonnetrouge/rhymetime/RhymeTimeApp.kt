@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import com.bonnetrouge.rhymetime.di.components.AppComponent
 import com.bonnetrouge.rhymetime.di.components.DaggerAppComponent
+import com.facebook.stetho.Stetho
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
@@ -21,6 +22,7 @@ class RhymeTimeApp : Application(), HasActivityInjector {
         super.onCreate()
         createAppComponent()
         appComponent.inject(this)
+        Stetho.initializeWithDefaults(this)
     }
 
     private fun createAppComponent() {

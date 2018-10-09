@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
 import com.bonnetrouge.rhymetime.di.ViewModelKey
 import com.bonnetrouge.rhymetime.viewmodels.SearchViewModel
+import com.bonnetrouge.rhymetime.viewmodels.SingleWordViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -18,4 +19,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SearchViewModel::class)
     abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SingleWordViewModel::class)
+    abstract fun bindSingleWordViewModel(singleWordViewModel: SingleWordViewModel): ViewModel
 }

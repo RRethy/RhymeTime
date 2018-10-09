@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,17 +17,17 @@ import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.ext.observe
 import com.bonnetrouge.rhymetime.ext.swapFragment
 import com.bonnetrouge.rhymetime.listeners.RVClickListener
-import com.bonnetrouge.rhymetime.models.Suggestion
+import com.bonnetrouge.rhymetime.models.WordInfo
 import com.bonnetrouge.rhymetime.viewmodels.SearchViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
-class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener, RVClickListener<Suggestion> {
+class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener, RVClickListener<WordInfo> {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
-    private val searchViewModel: SearchViewModel by lazyAndroid {
+    private val searchViewModel by lazyAndroid {
         ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
     }
 
@@ -68,7 +67,7 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
         if (s.isEmpty()) suggestionsAdapter.submitList(null)
     }
 
-    override fun onItemClick(data: Suggestion, index: Int) {
+    override fun onItemClick(data: WordInfo, index: Int) {
         (activity as AppCompatActivity).swapFragment(
                 R.id.fragmentContainer,
                 SingleWordFragment.TAG,
