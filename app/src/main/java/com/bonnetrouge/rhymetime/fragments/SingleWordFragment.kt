@@ -33,9 +33,11 @@ class SingleWordFragment : DaggerFragment() {
     private val nearRhymesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_near_rhymes) }
     private val homophonesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_homophones) }
 
+    private val word by lazyAndroid { arguments?.getString(WORD_KEY)!! }
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        singleWordViewModel.getWordRhymes(arguments?.getString(WORD_KEY)!!).observe(this) {
+        singleWordViewModel.getWordRhymes(word).observe(this) {
             it?.let {
                 wordTitle?.text = it.word
                 it.rhymes?.letNonEmpty {
@@ -57,6 +59,20 @@ class SingleWordFragment : DaggerFragment() {
                     addTransition(Slide())
                 }
                 TransitionManager.beginDelayedTransition(root, transition)
+            }
+        }
+        singleWordViewModel.isWordFavorite(word).observe(this) {
+            if (it == null) return@observe
+            if (it) {
+                favoriteFab.setImageResource(R.drawable.ic_star_filled_white_24dp)
+                favoriteFab.setOnClickListener {
+                    singleWordViewModel.removeFavorite(word)
+                }
+            } else {
+                favoriteFab.setImageResource(R.drawable.ic_star_border_white_24dp)
+                favoriteFab.setOnClickListener {
+                    singleWordViewModel.addFavorite(word)
+                }
             }
         }
     }
