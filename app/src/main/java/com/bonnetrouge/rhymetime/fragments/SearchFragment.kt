@@ -16,7 +16,6 @@ import com.bonnetrouge.rhymetime.commons.DebounceTextWatcher
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.ext.observe
-import com.bonnetrouge.rhymetime.ext.swapFragment
 import com.bonnetrouge.rhymetime.listeners.RVClickListener
 import com.bonnetrouge.rhymetime.models.WordInfo
 import com.bonnetrouge.rhymetime.viewmodels.SearchViewModel
@@ -25,7 +24,9 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 import android.support.v4.content.ContextCompat.getSystemService
 import android.view.inputmethod.InputMethodManager
+import com.bonnetrouge.rhymetime.activities.MainActivity
 import com.bonnetrouge.rhymetime.activities.SingleWordActivity
+import com.bonnetrouge.rhymetime.ext.fragmentTransaction
 
 
 class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener, RVClickListener<WordInfo> {
@@ -85,12 +86,12 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     }
 
     private fun openFragmentForWord(word: String) {
-        (activity as AppCompatActivity).swapFragment(
-                R.id.fragmentContainer,
-                SingleWordFragment.TAG,
-                SingleWordFragment.getInstance(word),
-                true
-        )
+        with (activity as MainActivity) {
+            showBackButton()
+            fragmentTransaction(true) {
+                replace(R.id.fragmentContainer, SingleWordFragment.getInstance(word), SingleWordFragment.TAG)
+            }
+        }
     }
 
     companion object {

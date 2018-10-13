@@ -19,26 +19,6 @@ inline fun AppCompatActivity.fragmentTransaction(addToBackStack: Boolean = false
     transaction.commit()
 }
 
-fun AppCompatActivity.swapFragment(
-        containerId: Int,
-        tag: String,
-        fragment: Fragment,
-        addToBackStack: Boolean = false
-) {
-    val transaction = supportFragmentManager.beginTransaction()
-    val oldFragment = supportFragmentManager.findFragmentById(containerId)
-    if (supportFragmentManager.findFragmentByTag(tag) == null) {
-        transaction.add(containerId, fragment, tag)
-    }
-    oldFragment?.let { transaction.hide(it) }
-    transaction.setCustomAnimations(R.anim.grow_in, R.anim.hide)
-    transaction.show(fragment)
-    if (addToBackStack) {
-        transaction.addToBackStack(tag)
-    }
-    transaction.commit()
-}
-
 /**
  * Faster lazy delegation for Android.
  * Warning: Only use for objects accessed on main thread
