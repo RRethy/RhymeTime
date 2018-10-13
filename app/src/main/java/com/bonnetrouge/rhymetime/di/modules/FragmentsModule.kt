@@ -1,13 +1,7 @@
 package com.bonnetrouge.rhymetime.di.modules
 
-import com.bonnetrouge.rhymetime.di.components.ChallengeFragmentSubcomponent
-import com.bonnetrouge.rhymetime.di.components.SandboxFragmentSubcomponent
-import com.bonnetrouge.rhymetime.di.components.SearchFragmentSubcomponent
-import com.bonnetrouge.rhymetime.di.components.SingleWordSubcomponent
-import com.bonnetrouge.rhymetime.fragments.ChallengeFragment
-import com.bonnetrouge.rhymetime.fragments.SandboxFragment
-import com.bonnetrouge.rhymetime.fragments.SearchFragment
-import com.bonnetrouge.rhymetime.fragments.SingleWordFragment
+import com.bonnetrouge.rhymetime.di.components.*
+import com.bonnetrouge.rhymetime.fragments.*
 import dagger.Binds
 import dagger.Module
 import dagger.android.AndroidInjector
@@ -44,5 +38,11 @@ abstract class FragmentsModule {
     @IntoMap
     @FragmentKey(SingleWordFragment::class)
     abstract fun bindSingleWordFragment(build: SingleWordSubcomponent.Builder):
+            AndroidInjector.Factory<out android.support.v4.app.Fragment>
+
+    @Binds
+    @IntoMap
+    @FragmentKey(FavoritesFragment::class)
+    abstract fun bindFavoritesFragment(build: FavoritesSubcomponent.Builder):
             AndroidInjector.Factory<out android.support.v4.app.Fragment>
 }

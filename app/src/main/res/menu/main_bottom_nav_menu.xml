@@ -5,6 +5,10 @@
 		android:title="@string/search"
 		/>
 	<item
+		android:id="@+id/menu_favorites"
+		android:title="@string/sandbox"
+		/>
+	<item
 		android:id="@+id/menu_challenges"
 		android:title="@string/challenges"
 		/>

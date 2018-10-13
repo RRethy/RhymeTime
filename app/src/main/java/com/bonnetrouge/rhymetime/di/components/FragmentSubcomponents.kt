@@ -1,9 +1,6 @@
 package com.bonnetrouge.rhymetime.di.components
 
-import com.bonnetrouge.rhymetime.fragments.ChallengeFragment
-import com.bonnetrouge.rhymetime.fragments.SandboxFragment
-import com.bonnetrouge.rhymetime.fragments.SearchFragment
-import com.bonnetrouge.rhymetime.fragments.SingleWordFragment
+import com.bonnetrouge.rhymetime.fragments.*
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
@@ -25,4 +22,9 @@ interface SearchFragmentSubcomponent : AndroidInjector<SearchFragment> {
 @Subcomponent
 interface SingleWordSubcomponent : AndroidInjector<SingleWordFragment> {
     @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<SingleWordFragment>()
+}
+
+@Subcomponent
+interface FavoritesSubcomponent : AndroidInjector<FavoritesFragment> {
+    @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<FavoritesFragment>()
 }

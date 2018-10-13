@@ -9,6 +9,7 @@ import com.bonnetrouge.rhymetime.ext.doOnEnd
 import com.bonnetrouge.rhymetime.ext.fragmentTransaction
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.fragments.ChallengeFragment
+import com.bonnetrouge.rhymetime.fragments.FavoritesFragment
 import com.bonnetrouge.rhymetime.fragments.SandboxFragment
 import com.bonnetrouge.rhymetime.fragments.SearchFragment
 import dagger.android.support.DaggerAppCompatActivity
@@ -19,6 +20,7 @@ class MainActivity : DaggerAppCompatActivity() {
     private val challengeFragment by lazyAndroid { ChallengeFragment.getInstance() }
     private val sandboxFragment by lazyAndroid { SandboxFragment.getInstance() }
     private val searchFragment by lazyAndroid { SearchFragment.getInstance() }
+    private val favoritesFragment by lazyAndroid { FavoritesFragment.getInstance() }
 
     private var showingBackButton = false
 
@@ -62,6 +64,7 @@ class MainActivity : DaggerAppCompatActivity() {
                 R.id.menu_challenges -> prettySwapFragment(challengeFragment, ChallengeFragment.TAG)
                 R.id.menu_search -> prettySwapFragment(searchFragment, SearchFragment.TAG)
                 R.id.menu_sandbox -> prettySwapFragment(sandboxFragment, SandboxFragment.TAG)
+                R.id.menu_favorites -> prettySwapFragment(favoritesFragment, FavoritesFragment.TAG)
             }
             BottomSheetBehavior.from(bottomDrawer).state = BottomSheetBehavior.STATE_HIDDEN
             true
