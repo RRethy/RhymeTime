@@ -86,11 +86,8 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     }
 
     private fun openFragmentForWord(word: String) {
-        with (activity as MainActivity) {
-            showBackButton()
-            fragmentTransaction(true) {
-                replace(R.id.fragmentContainer, SingleWordFragment.getInstance(word), SingleWordFragment.TAG)
-            }
+        (activity as AppCompatActivity).fragmentTransaction(true) {
+            replace(R.id.fragmentContainer, SingleWordFragment.getInstance(word), SingleWordFragment.TAG)
         }
     }
 

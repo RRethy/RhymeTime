@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bonnetrouge.rhymetime.R
+import com.bonnetrouge.rhymetime.activities.MainActivity
 import com.bonnetrouge.rhymetime.adapters.SimpleWordAdapter
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
 import com.bonnetrouge.rhymetime.ext.*
@@ -37,6 +38,7 @@ class SingleWordFragment : DaggerFragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        (activity as MainActivity).showBackButton()
         singleWordViewModel.getWordRhymes(word).observe(this) {
             it?.let {
                 wordTitle?.text = it.word

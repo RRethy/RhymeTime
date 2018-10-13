@@ -61,9 +61,9 @@ class MainActivity : DaggerAppCompatActivity() {
         }
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_challenges -> prettySwapFragment(challengeFragment, ChallengeFragment.TAG)
+//                R.id.menu_challenges -> prettySwapFragment(challengeFragment, ChallengeFragment.TAG)
                 R.id.menu_search -> prettySwapFragment(searchFragment, SearchFragment.TAG)
-                R.id.menu_sandbox -> prettySwapFragment(sandboxFragment, SandboxFragment.TAG)
+//                R.id.menu_sandbox -> prettySwapFragment(sandboxFragment, SandboxFragment.TAG)
                 R.id.menu_favorites -> prettySwapFragment(favoritesFragment, FavoritesFragment.TAG)
             }
             BottomSheetBehavior.from(bottomDrawer).state = BottomSheetBehavior.STATE_HIDDEN
