@@ -3,14 +3,16 @@ package com.bonnetrouge.rhymetime.fragments
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.support.transition.TransitionManager
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bonnetrouge.rhymetime.R
+import com.bonnetrouge.rhymetime.adapters.SimpleWordAdapter
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
-import com.bonnetrouge.rhymetime.ext.lazyAndroid
-import com.bonnetrouge.rhymetime.ext.observe
+import com.bonnetrouge.rhymetime.ext.*
 import com.bonnetrouge.rhymetime.viewmodels.SingleWordViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_single_word.*
@@ -24,11 +26,30 @@ class SingleWordFragment : DaggerFragment() {
         ViewModelProviders.of(this, viewModelFactory).get(SingleWordViewModel::class.java)
     }
 
+    private val rhymesAdapter by lazyAndroid { SimpleWordAdapter() }
+    private val nearRhymesAdapter by lazyAndroid { SimpleWordAdapter() }
+    private val homophonesAdapter by lazyAndroid { SimpleWordAdapter() }
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         singleWordViewModel.updateCurrentWord(arguments?.getString(WORD_KEY)!!)
         singleWordViewModel.wordDataLiveData.observe(this) {
-            it?.let { textView?.text = it.toString() }
+            it?.let {
+                wordTitle?.text = it.word
+                it.rhymes?.letNonEmpty {
+                    rhymesAdapter.submitList(it)
+                    rhymeRV.visible()
+                }
+                it.nearRhymes?.letNonEmpty {
+                    nearRhymesAdapter.submitList(it)
+                    nearRhymesRV.visible()
+                }
+                it.homophones?.letNonEmpty {
+                    homophonesAdapter.submitList(it)
+                    homophonesRV.visible()
+                }
+                TransitionManager.beginDelayedTransition(root)
+            }
         }
     }
 
@@ -38,6 +59,25 @@ class SingleWordFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerViews()
+    }
+
+    private fun setupRecyclerViews() {
+        rhymeRV.gone()
+        nearRhymesRV.gone()
+        homophonesRV.gone()
+        with (rhymeRV) {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = rhymesAdapter
+        }
+        with (nearRhymesRV) {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = nearRhymesAdapter
+        }
+        with (homophonesRV) {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = homophonesAdapter
+        }
     }
 
     companion object {

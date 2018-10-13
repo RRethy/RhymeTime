@@ -6,6 +6,8 @@ import android.arch.lifecycle.Observer
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.util.DiffUtil
+import android.view.View
 import com.bonnetrouge.rhymetime.R
 
 inline fun AppCompatActivity.fragmentTransaction(addToBackStack: Boolean = false, tag: String? = null, swapInfo: FragmentTransaction.() -> Unit) {
@@ -49,3 +51,21 @@ fun <T> lazyAndroid(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.N
  * data.observe(this) { ... }
  */
 fun <T> LiveData<T>.observe(owner: LifecycleOwner, observer: (T?) -> Unit) = observe(owner, Observer(observer))
+
+val stringDiffCallback = object : DiffUtil.ItemCallback<String>() {
+    override fun areItemsTheSame(s1: String, s2: String) = s1 == s2
+
+    override fun areContentsTheSame(s1: String, s2: String) = true
+}
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.invisible() {
+    this.visibility = View.INVISIBLE
+}
+
+fun View.gone() {
+    this.visibility = View.GONE
+}

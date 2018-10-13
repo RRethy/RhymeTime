@@ -23,6 +23,9 @@ import com.bonnetrouge.rhymetime.viewmodels.SearchViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
+import android.support.v4.content.ContextCompat.getSystemService
+import android.view.inputmethod.InputMethodManager
+
 
 class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener, RVClickListener<WordInfo> {
 
@@ -54,7 +57,7 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
             recyclerView.addItemDecoration(DividerItemDecoration(context, this.orientation))
         }
         recyclerView.adapter = suggestionsAdapter
-        searchEditText.setOnEditorActionListener { v, actionId, event ->
+        searchEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 openFragmentForWord(searchEditText.text.toString())
             }
@@ -75,6 +78,8 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     }
 
     override fun onItemClick(data: WordInfo, index: Int) {
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.hideSoftInputFromWindow(searchEditText.windowToken, 0)
         openFragmentForWord(data.word)
     }
 

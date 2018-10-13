@@ -19,3 +19,7 @@ val bgPool: CoroutineDispatcher by lazy {
         else -> CommonPool
     }
 }
+
+inline fun <T> List<T>.letNonEmpty(action: (List<T>) -> Unit) {
+    if (this.isNotEmpty()) action(this)
+}

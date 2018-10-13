@@ -1,13 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/root"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<TextView
-		android:id="@+id/textView"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:gravity="center"
+	<View
+		android:id="@+id/wordBg"
+		android:layout_width="0dp"
+		android:layout_height="124dp"
+		android:layout_margin="24dp"
+		android:background="@drawable/rounded_word_bg"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
 		/>
+
+	<TextView
+		android:id="@+id/wordTitle"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:fontFamily="sans-serif-smallcaps"
+		android:gravity="center"
+		android:textColor="@color/colorAccent"
+		android:textSize="32sp"
+		app:layout_constraintBottom_toBottomOf="@id/wordBg"
+		app:layout_constraintEnd_toEndOf="@id/wordBg"
+		app:layout_constraintStart_toStartOf="@id/wordBg"
+		app:layout_constraintTop_toTopOf="@id/wordBg"
+		tools:text="Android"
+		/>
+
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/rhymeRV"
+		android:layout_width="0dp"
+		android:layout_height="72dp"
+		android:layout_marginEnd="8dp"
+		android:layout_marginStart="8dp"
+		app:layout_constraintBottom_toTopOf="@+id/nearRhymesRV"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/wordTitle"/>
+
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/nearRhymesRV"
+		android:layout_width="0dp"
+		android:layout_height="72dp"
+		android:layout_marginEnd="8dp"
+		android:layout_marginStart="8dp"
+		app:layout_constraintBottom_toTopOf="@+id/homophonesRV"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/rhymeRV"/>
+
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/homophonesRV"
+		android:layout_width="0dp"
+		android:layout_height="72dp"
+		android:layout_marginEnd="8dp"
+		android:layout_marginStart="8dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/nearRhymesRV"/>
+
 </android.support.constraint.ConstraintLayout>

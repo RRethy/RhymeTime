@@ -5,7 +5,7 @@ import android.arch.persistence.room.TypeConverter
 class TypeConverters {
     @TypeConverter
     fun stringToWordList(s: String?): List<String>? {
-        return s?.split(DELIMETER)
+        return if (s.isNullOrEmpty()) null else s?.split(DELIMETER)
     }
 
     @TypeConverter
