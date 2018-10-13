@@ -1,9 +1,7 @@
 package com.bonnetrouge.rhymetime.repositories.impls
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import com.bonnetrouge.rhymetime.ext.bgPool
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.models.WordInfo
@@ -28,23 +26,12 @@ class DatamuseRepoImpl @Inject constructor(
     private var suggestionCall: Call<List<WordInfo>>? = null
 
     private val suggestionsLiveData by lazyAndroid { MutableLiveData<List<WordInfo>>() }
-    private val wordRhymesLiveData by lazyAndroid { MediatorLiveData<WordRhymes?>() }
-    private var prevWordLiveData: LiveData<WordRhymes>? = null
 
-    override fun getWordInfoLiveData(): LiveData<WordRhymes?> {
-        return wordRhymesLiveData
-    }
-
-    override fun updateCurrentWord(word: String) {
+    override fun getWordRhymes(word: String): LiveData<WordRhymes?> {
         fetchHomophones(word)
         fetchRhymes(word)
         fetchNearRhymes(word)
-        prevWordLiveData?.let { wordRhymesLiveData.removeSource(it) }
-        wordRhymesLiveData.value = null
-        prevWordLiveData = wordsInfoDao.getWordPackedRhymes(word)
-        wordRhymesLiveData.addSource(prevWordLiveData!!) {
-            wordRhymesLiveData.value = it
-        }
+        return wordsInfoDao.getWordRhymesLiveData(word)
     }
 
     private fun fetchHomophones(word: String) {
@@ -55,7 +42,7 @@ class DatamuseRepoImpl @Inject constructor(
 
                         if (response.isSuccessful) {
                             GlobalScope.launch(bgPool) {
-                                val wordRhymes = wordRhymesLiveData.value ?: WordRhymes(word)
+                                val wordRhymes = wordsInfoDao.getWordRhymes(word) ?: WordRhymes(word)
                                 wordsInfoDao.addWord(wordRhymes.apply {
                                     homophones = response.body()?.map { it.word }
                                 })
@@ -76,7 +63,7 @@ class DatamuseRepoImpl @Inject constructor(
 
                         if (response.isSuccessful) {
                             GlobalScope.launch(bgPool) {
-                                val wordRhymes = wordRhymesLiveData.value ?: WordRhymes(word)
+                                val wordRhymes = wordsInfoDao.getWordRhymes(word) ?: WordRhymes(word)
                                 wordsInfoDao.addWord(wordRhymes.apply {
                                     rhymes = response.body()?.map { it.word }
                                 })
@@ -97,7 +84,7 @@ class DatamuseRepoImpl @Inject constructor(
 
                         if (response.isSuccessful) {
                             GlobalScope.launch(bgPool) {
-                                val wordRhymes = wordRhymesLiveData.value ?: WordRhymes(word)
+                                val wordRhymes = wordsInfoDao.getWordRhymes(word) ?: WordRhymes(word)
                                 wordsInfoDao.addWord(wordRhymes.apply {
                                     nearRhymes = response.body()?.map { it.word }
                                 })

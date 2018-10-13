@@ -8,9 +8,7 @@ import android.support.transition.Slide
 import android.support.transition.TransitionManager
 import android.support.transition.TransitionSet
 import android.support.transition.TransitionSet.ORDERING_SEQUENTIAL
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,8 +35,7 @@ class SingleWordFragment : DaggerFragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        singleWordViewModel.updateCurrentWord(arguments?.getString(WORD_KEY)!!)
-        singleWordViewModel.wordDataLiveData.observe(this) {
+        singleWordViewModel.getWordRhymes(arguments?.getString(WORD_KEY)!!).observe(this) {
             it?.let {
                 wordTitle?.text = it.word
                 it.rhymes?.letNonEmpty {
@@ -71,9 +68,6 @@ class SingleWordFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViews()
-        favoriteFab.setOnClickListener {
-            Log.d("Quman", "favorite fab touched")
-        }
     }
 
     private fun setupRecyclerViews() {

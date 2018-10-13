@@ -17,5 +17,8 @@ interface WordsInfoDao {
     fun addWord(word: WordRhymes)
 
     @Query("SELECT * FROM wordrhymes WHERE word = :word")
-    fun getWordPackedRhymes(word: String): LiveData<WordRhymes>
+    fun getWordRhymesLiveData(word: String): LiveData<WordRhymes?>
+
+    @Query("SELECT * FROM wordrhymes WHERE word = :word LIMIT 1")
+    fun getWordRhymes(word: String): WordRhymes?
 }

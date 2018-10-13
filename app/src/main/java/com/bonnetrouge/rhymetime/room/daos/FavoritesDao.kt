@@ -11,7 +11,7 @@ import com.bonnetrouge.rhymetime.models.WordFavorite
 @Dao
 interface FavoritesDao {
 
-    @Query("SELECT count(1) FROM wordfavorite WHERE word = :word")
+    @Query("SELECT count(*) FROM wordfavorite WHERE word = :word")
     fun isFavorite(word: String): LiveData<Int>
 
     @Insert(onConflict = REPLACE)
