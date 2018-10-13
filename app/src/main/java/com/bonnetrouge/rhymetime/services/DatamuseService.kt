@@ -9,14 +9,14 @@ import retrofit2.http.Query
 interface DatamuseService {
 
     @GET("sug")
-    fun getCompletionSuggestion(@Query(value = "s", encoded = true) word: String): Call<List<WordInfo>>
+    fun getCompletionSuggestion(@Query(value = "s") word: String): Call<List<WordInfo>>
 
     @GET("words")
-    fun getRhymes(@Query(value = "rel_rhy", encoded = true) word: String): Call<List<WordInfo>>
+    fun getRhymes(@Query(value = "rel_rhy") word: String): Call<List<WordInfo>>
 
     @GET("words")
-    fun getApproxRhymes(@Query(value = "rel_nry", encoded = true) word: String): Call<List<WordInfo>>
+    fun getApproxRhymes(@Query(value = "rel_nry") word: String): Call<List<WordInfo>>
 
     @GET("words")
-    fun getHomophones(@Query(value = "rel_hom", encoded = true) word: String): Call<List<WordInfo>>
+    fun getHomophones(@Query(value = "rel_hom") word: String): Call<List<WordInfo>>
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import com.bonnetrouge.rhymetime.R
 import com.bonnetrouge.rhymetime.adapters.SearchAdapter
 import com.bonnetrouge.rhymetime.commons.DebounceTextWatcher
@@ -53,6 +54,12 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
             recyclerView.addItemDecoration(DividerItemDecoration(context, this.orientation))
         }
         recyclerView.adapter = suggestionsAdapter
+        searchEditText.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                openFragmentForWord(searchEditText.text.toString())
+            }
+            false
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -68,10 +75,14 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     }
 
     override fun onItemClick(data: WordInfo, index: Int) {
+        openFragmentForWord(data.word)
+    }
+
+    private fun openFragmentForWord(word: String) {
         (activity as AppCompatActivity).swapFragment(
                 R.id.fragmentContainer,
                 SingleWordFragment.TAG,
-                SingleWordFragment.getInstance(data.word),
+                SingleWordFragment.getInstance(word),
                 true
         )
     }
