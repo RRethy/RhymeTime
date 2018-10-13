@@ -5,65 +5,166 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/root"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	android:paddingBottom="84dp">
 
 	<View
 		android:id="@+id/wordBg"
 		android:layout_width="0dp"
-		android:layout_height="124dp"
-		android:layout_margin="24dp"
+		android:layout_height="0dp"
 		android:background="@drawable/rounded_word_bg"
+		android:layout_marginBottom="24dp"
+		android:elevation="4dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toTopOf="@id/rhymeCard"
 		/>
 
 	<TextView
 		android:id="@+id/wordTitle"
-		android:layout_width="0dp"
-		android:layout_height="0dp"
-		android:fontFamily="sans-serif-smallcaps"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:gravity="center"
-		android:textColor="@color/colorAccent"
+		android:textColor="@android:color/white"
 		android:textSize="32sp"
+		android:layout_marginStart="24dp"
+		android:layout_marginBottom="12dp"
+		android:elevation="4dp"
 		app:layout_constraintBottom_toBottomOf="@id/wordBg"
-		app:layout_constraintEnd_toEndOf="@id/wordBg"
 		app:layout_constraintStart_toStartOf="@id/wordBg"
-		app:layout_constraintTop_toTopOf="@id/wordBg"
 		tools:text="Android"
 		/>
 
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/rhymeRV"
+	<android.support.v7.widget.CardView
+		android:id="@+id/rhymeCard"
 		android:layout_width="0dp"
-		android:layout_height="72dp"
-		android:layout_marginEnd="8dp"
-		android:layout_marginStart="8dp"
-		app:layout_constraintBottom_toTopOf="@+id/nearRhymesRV"
+		android:layout_height="120dp"
+		android:layout_marginBottom="12dp"
+		android:layout_marginEnd="12dp"
+		android:layout_marginStart="12dp"
+		app:cardCornerRadius="12dp"
+		app:layout_constraintBottom_toTopOf="@+id/nearRhymesCard"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/wordTitle"/>
+		>
 
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/nearRhymesRV"
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:foreground="@drawable/bg_outline_rhymes"
+			>
+			<TextView
+				android:id="@+id/rhymesTitle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="8dp"
+				android:textSize="16sp"
+				android:gravity="center"
+				android:textColor="@android:color/black"
+				android:background="@color/rhymes"
+				android:text="@string/rhymes"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				/>
+
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rhymeRV"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/rhymesTitle"
+				/>
+		</android.support.constraint.ConstraintLayout>
+	</android.support.v7.widget.CardView>
+
+	<android.support.v7.widget.CardView
+		android:id="@+id/nearRhymesCard"
 		android:layout_width="0dp"
-		android:layout_height="72dp"
-		android:layout_marginEnd="8dp"
-		android:layout_marginStart="8dp"
-		app:layout_constraintBottom_toTopOf="@+id/homophonesRV"
+		android:layout_height="120dp"
+		android:layout_marginBottom="12dp"
+		android:layout_marginEnd="12dp"
+		android:layout_marginStart="12dp"
+		app:cardCornerRadius="12dp"
+		app:layout_constraintBottom_toTopOf="@id/homophonesCard"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/rhymeRV"/>
+		>
 
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/homophonesRV"
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:foreground="@drawable/bg_outline_near_rhymes"
+			>
+			<TextView
+				android:id="@+id/nearRhymesTitle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="8dp"
+				android:textSize="16sp"
+				android:gravity="center"
+				android:textColor="@android:color/black"
+				android:background="@color/nearrhymes"
+				android:text="@string/near_rhymes"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				/>
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/nearRhymesRV"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/nearRhymesTitle"
+				/>
+		</android.support.constraint.ConstraintLayout>
+	</android.support.v7.widget.CardView>
+
+	<android.support.v7.widget.CardView
+		android:id="@+id/homophonesCard"
 		android:layout_width="0dp"
-		android:layout_height="72dp"
-		android:layout_marginEnd="8dp"
-		android:layout_marginStart="8dp"
-		app:layout_constraintBottom_toBottomOf="parent"
+		android:layout_height="120dp"
+		android:layout_marginBottom="12dp"
+		android:layout_marginEnd="12dp"
+		android:layout_marginStart="12dp"
+		app:cardCornerRadius="12dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/nearRhymesRV"/>
+		app:layout_constraintBottom_toBottomOf="parent">
 
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:foreground="@drawable/bg_outline_homophones"
+			>
+		<TextView
+			android:id="@+id/homophonesTitle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="8dp"
+			android:textSize="16sp"
+			android:gravity="center"
+			android:textColor="@android:color/black"
+			android:background="@color/homophones"
+			android:text="@string/homophones"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			/>
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/homophonesRV"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/homophonesTitle"
+			/>
+		</android.support.constraint.ConstraintLayout>
+	</android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

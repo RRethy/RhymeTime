@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 import android.support.v4.content.ContextCompat.getSystemService
 import android.view.inputmethod.InputMethodManager
+import com.bonnetrouge.rhymetime.activities.SingleWordActivity
 
 
 class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener, RVClickListener<WordInfo> {

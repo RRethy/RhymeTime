@@ -3,7 +3,11 @@ package com.bonnetrouge.rhymetime.fragments
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
+import android.support.transition.ChangeBounds
+import android.support.transition.Slide
 import android.support.transition.TransitionManager
+import android.support.transition.TransitionSet
+import android.support.transition.TransitionSet.ORDERING_SEQUENTIAL
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -26,9 +30,9 @@ class SingleWordFragment : DaggerFragment() {
         ViewModelProviders.of(this, viewModelFactory).get(SingleWordViewModel::class.java)
     }
 
-    private val rhymesAdapter by lazyAndroid { SimpleWordAdapter() }
-    private val nearRhymesAdapter by lazyAndroid { SimpleWordAdapter() }
-    private val homophonesAdapter by lazyAndroid { SimpleWordAdapter() }
+    private val rhymesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_rhymes) }
+    private val nearRhymesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_near_rhymes) }
+    private val homophonesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_homophones) }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -38,17 +42,23 @@ class SingleWordFragment : DaggerFragment() {
                 wordTitle?.text = it.word
                 it.rhymes?.letNonEmpty {
                     rhymesAdapter.submitList(it)
-                    rhymeRV.visible()
+                    rhymeCard.visible()
                 }
                 it.nearRhymes?.letNonEmpty {
                     nearRhymesAdapter.submitList(it)
-                    nearRhymesRV.visible()
+                    nearRhymesCard.visible()
                 }
                 it.homophones?.letNonEmpty {
                     homophonesAdapter.submitList(it)
-                    homophonesRV.visible()
+                    homophonesCard.visible()
                 }
-                TransitionManager.beginDelayedTransition(root)
+                val transition = TransitionSet().apply {
+                    duration = 500L
+                    ordering = ORDERING_SEQUENTIAL
+                    addTransition(ChangeBounds())
+                    addTransition(Slide())
+                }
+                TransitionManager.beginDelayedTransition(root, transition)
             }
         }
     }
@@ -63,9 +73,9 @@ class SingleWordFragment : DaggerFragment() {
     }
 
     private fun setupRecyclerViews() {
-        rhymeRV.gone()
-        nearRhymesRV.gone()
-        homophonesRV.gone()
+        rhymeCard.gone()
+        nearRhymesCard.gone()
+        homophonesCard.gone()
         with (rhymeRV) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = rhymesAdapter
