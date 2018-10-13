@@ -20,7 +20,7 @@ class MainActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) swapFragment(R.id.fragmentContainer, ChallengeFragment.TAG, challengeFragment)
+        if (savedInstanceState == null) swapFragment(R.id.fragmentContainer, SearchFragment.TAG, searchFragment)
         setupBottomDrawer()
     }
 
