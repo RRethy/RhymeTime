@@ -1,9 +1,11 @@
 package com.bonnetrouge.rhymetime.activities
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import com.bonnetrouge.rhymetime.R
+import com.bonnetrouge.rhymetime.ext.doOnEnd
 import com.bonnetrouge.rhymetime.ext.fragmentTransaction
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.fragments.ChallengeFragment
@@ -26,7 +28,8 @@ class MainActivity : DaggerAppCompatActivity() {
         if (savedInstanceState == null) fragmentTransaction {
             add(R.id.fragmentContainer, searchFragment, SearchFragment.TAG)
         }
-        else showingBackButton = savedInstanceState.getBoolean("backbuttonshowing")
+        else showingBackButton = savedInstanceState.getBoolean(BACK_BUTTON_KEY)
+
         if (showingBackButton) {
             showBackButton()
         } else {
@@ -36,7 +39,7 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.putBoolean("backbuttonshowing", showingBackButton)
+        outState?.putBoolean(BACK_BUTTON_KEY, showingBackButton)
         super.onSaveInstanceState(outState)
     }
 
@@ -73,12 +76,27 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     fun showBackButton() {
+        fab.animate().scaleY(0F).scaleX(0F).setDuration(250).withEndAction {
+            ValueAnimator.ofFloat(0F, 200F).apply {
+                duration = 300
+                addUpdateListener {
+                    appBar.cradleVerticalOffset = it.animatedValue as Float
+                }
+                start()
+            }
+        }.start()
         appBar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         showingBackButton = true
     }
 
     fun hideBackButton() {
+        appBar.cradleVerticalOffset = 0F
+        fab.animate().scaleY(1F).scaleX(1F).setDuration(250).start()
         appBar.setNavigationIcon(R.drawable.ic_menu_white_24dp)
         showingBackButton = false
+    }
+
+    companion object {
+        const val BACK_BUTTON_KEY = "back_button_state"
     }
 }

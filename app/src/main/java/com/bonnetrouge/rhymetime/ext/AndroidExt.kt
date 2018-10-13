@@ -1,5 +1,7 @@
 package com.bonnetrouge.rhymetime.ext
 
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
@@ -48,4 +50,21 @@ fun View.invisible() {
 
 fun View.gone() {
     this.visibility = View.GONE
+}
+
+fun ValueAnimator.doOnEnd(action: () -> Unit) {
+    this.addListener(object : android.animation.Animator.AnimatorListener {
+        override fun onAnimationRepeat(animation: Animator?) {
+        }
+
+        override fun onAnimationEnd(animation: Animator?) {
+            action()
+        }
+
+        override fun onAnimationCancel(animation: Animator?) {
+        }
+
+        override fun onAnimationStart(animation: Animator?) {
+        }
+    })
 }
