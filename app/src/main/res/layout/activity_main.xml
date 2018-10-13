@@ -19,7 +19,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="?attr/actionBarSize"
 		android:layout_gravity="bottom"
-		app:backgroundTint="@android:color/black"
+		app:backgroundTint="@color/colorPrimary"
 		app:fabCradleRoundedCornerRadius="24dp"
 		app:navigationIcon="@drawable/ic_menu_white_24dp"
 		/>
@@ -49,6 +49,5 @@
 			app:elevation="16dp"
 			app:itemTextColor="@android:color/white"
 			/>
-
 	</FrameLayout>
 </android.support.design.widget.CoordinatorLayout>
