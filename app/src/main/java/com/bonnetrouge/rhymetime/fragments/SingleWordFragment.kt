@@ -10,6 +10,7 @@ import android.support.transition.TransitionSet
 import android.support.transition.TransitionSet.ORDERING_SEQUENTIAL
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +71,9 @@ class SingleWordFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViews()
+        favoriteFab.setOnClickListener {
+            Log.d("Quman", "favorite fab touched")
+        }
     }
 
     private fun setupRecyclerViews() {
