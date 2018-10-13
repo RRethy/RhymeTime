@@ -12,7 +12,8 @@ import dagger.multibindings.IntoMap
     ChallengeFragmentSubcomponent::class,
     SandboxFragmentSubcomponent::class,
     SearchFragmentSubcomponent::class,
-    SingleWordSubcomponent::class
+    SingleWordSubcomponent::class,
+    FavoritesSubcomponent::class
 ])
 abstract class FragmentsModule {
     @Binds
