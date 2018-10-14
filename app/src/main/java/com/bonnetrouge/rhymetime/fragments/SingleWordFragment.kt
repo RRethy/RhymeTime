@@ -36,8 +36,7 @@ class SingleWordFragment : DaggerFragment() {
 
     private val word by lazyAndroid { arguments?.getString(WORD_KEY)!! }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity).showBackButton()
         singleWordViewModel.getWordRhymes(word).observe(this) {
             it?.let {
@@ -77,9 +76,6 @@ class SingleWordFragment : DaggerFragment() {
                 }
             }
         }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_single_word, container, false)
     }
 

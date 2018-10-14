@@ -3,6 +3,7 @@ package com.bonnetrouge.rhymetime.fragments
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import com.bonnetrouge.rhymetime.R
 import com.bonnetrouge.rhymetime.adapters.FavoritesAdapter
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
+import com.bonnetrouge.rhymetime.ext.fragmentTransaction
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
 import com.bonnetrouge.rhymetime.ext.observe
 import com.bonnetrouge.rhymetime.listeners.RVClickListener
@@ -31,14 +33,10 @@ class FavoritesFragment : DaggerFragment(), RVClickListener<WordFavorite> {
 
     private val favoritesAdapter by lazyAndroid { FavoritesAdapter(this) }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         favoritesViewModel.favorites.observe(this) {
             favoritesAdapter.submitList(it)
         }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
@@ -51,7 +49,9 @@ class FavoritesFragment : DaggerFragment(), RVClickListener<WordFavorite> {
     }
 
     override fun onItemClick(data: WordFavorite, index: Int) {
-        Log.d("Quman", data.toString())
+        (activity as AppCompatActivity).fragmentTransaction(true) {
+            replace(R.id.fragmentContainer, SingleWordFragment.getInstance(data.word), SingleWordFragment.TAG)
+        }
     }
 
     companion object {

@@ -40,17 +40,6 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     private val debounceTextWatcher by lazyAndroid { DebounceTextWatcher(this) }
     private val suggestionsAdapter by lazyAndroid { SearchAdapter(this) }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        searchViewModel.suggestionsLiveData.observe(this) {
-            if (searchEditText.text.toString().isEmpty()) {
-                suggestionsAdapter.submitList(null)
-            } else {
-                suggestionsAdapter.submitList(it)
-            }
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         searchEditText.addTextChangedListener(debounceTextWatcher)
@@ -68,6 +57,13 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        searchViewModel.suggestionsLiveData.observe(this) {
+            if (searchEditText.text.toString().isEmpty()) {
+                suggestionsAdapter.submitList(null)
+            } else {
+                suggestionsAdapter.submitList(it)
+            }
+        }
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
