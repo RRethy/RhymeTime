@@ -76,11 +76,6 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        hideBackButton()
-    }
-
     private fun setupBottomDrawer() {
         BottomSheetBehavior.from(bottomDrawer).state = BottomSheetBehavior.STATE_HIDDEN
         appBar.setNavigationOnClickListener {
@@ -124,7 +119,7 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     fun hideBackButton() {
-        if (appBar.cradleVerticalOffset == 0F) return
+        if (appBar.cradleVerticalOffset < 1) return
 
         appBar.cradleVerticalOffset = 0F
         fab.animate().scaleY(1F).scaleX(1F).setDuration(250).start()

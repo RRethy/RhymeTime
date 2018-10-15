@@ -23,6 +23,7 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 import android.view.inputmethod.InputMethodManager
+import com.bonnetrouge.rhymetime.activities.MainActivity
 import com.bonnetrouge.rhymetime.ext.fragmentTransaction
 
 
@@ -62,6 +63,11 @@ class SearchFragment : DaggerFragment(), DebounceTextWatcher.OnDebouncedListener
             }
         }
         return inflater.inflate(R.layout.fragment_search, container, false)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as MainActivity).hideBackButton()
     }
 
     override fun onDebounced(s: CharSequence) {

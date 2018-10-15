@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bonnetrouge.rhymetime.R
+import com.bonnetrouge.rhymetime.activities.MainActivity
 import com.bonnetrouge.rhymetime.adapters.FavoritesAdapter
 import com.bonnetrouge.rhymetime.commons.SimpleItemTouchHelper
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
@@ -46,6 +47,11 @@ class FavoritesFragment : DaggerFragment(), RVClickListener<WordFavorite>, Simpl
         wordList.adapter = favoritesAdapter
         wordList.addItemDecoration(DividerItemDecoration(context, lmanager.orientation))
         SimpleItemTouchHelper(this).attachToRecyclerView(wordList)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as MainActivity).hideBackButton()
     }
 
     override fun onItemClick(data: WordFavorite, index: Int) {

@@ -39,7 +39,6 @@ class SingleWordFragment : DaggerFragment(), RVClickListener<String> {
     private val word by lazyAndroid { arguments?.getString(WORD_KEY)!! }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as MainActivity).showBackButton()
         singleWordViewModel.getWordRhymes(word).observe(this) {
             it?.let {
                 wordTitle?.text = it.word
@@ -84,6 +83,11 @@ class SingleWordFragment : DaggerFragment(), RVClickListener<String> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViews()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as MainActivity).showBackButton()
     }
 
     private fun setupRecyclerViews() {
