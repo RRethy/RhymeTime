@@ -10,4 +10,6 @@ class FavoritesViewModel @Inject constructor(
 ) : ViewModel() {
 
     val favorites by lazyAndroid { userInfoRepo.getAllFavorites() }
+
+    fun removeFavorite(word: String) = userInfoRepo.removeFavorite(word)
 }

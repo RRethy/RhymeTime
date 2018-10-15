@@ -23,6 +23,8 @@ class FavoritesAdapter(
         p0.bind()
     }
 
+    fun getItemAtPosition(position: Int) = getItem(position)
+
     inner class FavoritesViewHolder(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
 

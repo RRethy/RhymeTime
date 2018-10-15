@@ -1,17 +1,16 @@
 package com.bonnetrouge.rhymetime.fragments
 
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bonnetrouge.rhymetime.R
 import com.bonnetrouge.rhymetime.adapters.FavoritesAdapter
+import com.bonnetrouge.rhymetime.commons.SimpleItemTouchHelper
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
 import com.bonnetrouge.rhymetime.ext.fragmentTransaction
 import com.bonnetrouge.rhymetime.ext.lazyAndroid
@@ -23,7 +22,7 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import javax.inject.Inject
 
-class FavoritesFragment : DaggerFragment(), RVClickListener<WordFavorite> {
+class FavoritesFragment : DaggerFragment(), RVClickListener<WordFavorite>, SimpleItemTouchHelper.OnItemChangedListener {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
@@ -46,12 +45,17 @@ class FavoritesFragment : DaggerFragment(), RVClickListener<WordFavorite> {
         wordList.layoutManager = lmanager
         wordList.adapter = favoritesAdapter
         wordList.addItemDecoration(DividerItemDecoration(context, lmanager.orientation))
+        SimpleItemTouchHelper(this).attachToRecyclerView(wordList)
     }
 
     override fun onItemClick(data: WordFavorite, index: Int) {
         (activity as AppCompatActivity).fragmentTransaction(true) {
             replace(R.id.fragmentContainer, SingleWordFragment.getInstance(data.word), SingleWordFragment.TAG)
         }
+    }
+
+    override fun onItemStateChanged(position: Int, direction: Int) {
+        favoritesViewModel.removeFavorite(favoritesAdapter.getItemAtPosition(position).word)
     }
 
     companion object {
