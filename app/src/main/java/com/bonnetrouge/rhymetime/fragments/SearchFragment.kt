@@ -22,10 +22,7 @@ import com.bonnetrouge.rhymetime.viewmodels.SearchViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
-import android.support.v4.content.ContextCompat.getSystemService
 import android.view.inputmethod.InputMethodManager
-import com.bonnetrouge.rhymetime.activities.MainActivity
-import com.bonnetrouge.rhymetime.activities.SingleWordActivity
 import com.bonnetrouge.rhymetime.ext.fragmentTransaction
 
 

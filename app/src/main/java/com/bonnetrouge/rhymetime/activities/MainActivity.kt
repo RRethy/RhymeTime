@@ -108,6 +108,8 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     fun showBackButton() {
+        if (appBar.cradleVerticalOffset > 0) return
+
         fab.animate().scaleY(0F).scaleX(0F).setDuration(250).withEndAction {
             ValueAnimator.ofFloat(0F, 200F).apply {
                 duration = 300
@@ -122,6 +124,8 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     fun hideBackButton() {
+        if (appBar.cradleVerticalOffset == 0F) return
+
         appBar.cradleVerticalOffset = 0F
         fab.animate().scaleY(1F).scaleX(1F).setDuration(250).start()
         appBar.setNavigationIcon(R.drawable.ic_menu_white_24dp)

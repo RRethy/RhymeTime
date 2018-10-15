@@ -8,6 +8,7 @@ import android.support.transition.Slide
 import android.support.transition.TransitionManager
 import android.support.transition.TransitionSet
 import android.support.transition.TransitionSet.ORDERING_SEQUENTIAL
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +18,13 @@ import com.bonnetrouge.rhymetime.activities.MainActivity
 import com.bonnetrouge.rhymetime.adapters.SimpleWordAdapter
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
 import com.bonnetrouge.rhymetime.ext.*
+import com.bonnetrouge.rhymetime.listeners.RVClickListener
 import com.bonnetrouge.rhymetime.viewmodels.SingleWordViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_single_word.*
 import javax.inject.Inject
 
-class SingleWordFragment : DaggerFragment() {
+class SingleWordFragment : DaggerFragment(), RVClickListener<String> {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
@@ -30,9 +32,9 @@ class SingleWordFragment : DaggerFragment() {
         ViewModelProviders.of(this, viewModelFactory).get(SingleWordViewModel::class.java)
     }
 
-    private val rhymesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_rhymes) }
-    private val nearRhymesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_near_rhymes) }
-    private val homophonesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_homophones) }
+    private val rhymesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_rhymes, this) }
+    private val nearRhymesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_near_rhymes, this) }
+    private val homophonesAdapter by lazyAndroid { SimpleWordAdapter(R.drawable.bg_outline_homophones, this) }
 
     private val word by lazyAndroid { arguments?.getString(WORD_KEY)!! }
 
@@ -99,6 +101,12 @@ class SingleWordFragment : DaggerFragment() {
         with (homophonesRV) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = homophonesAdapter
+        }
+    }
+
+    override fun onItemClick(data: String, index: Int) {
+        (activity as AppCompatActivity).fragmentTransaction(true) {
+            replace(R.id.fragmentContainer, SingleWordFragment.getInstance(word), SingleWordFragment.TAG)
         }
     }
 
