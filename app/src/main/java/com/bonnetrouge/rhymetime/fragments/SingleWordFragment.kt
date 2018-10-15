@@ -110,7 +110,7 @@ class SingleWordFragment : DaggerFragment(), RVClickListener<String> {
 
     override fun onItemClick(data: String, index: Int) {
         (activity as AppCompatActivity).fragmentTransaction(true) {
-            replace(R.id.fragmentContainer, SingleWordFragment.getInstance(word), SingleWordFragment.TAG)
+            replace(R.id.fragmentContainer, SingleWordFragment.getInstance(data), SingleWordFragment.TAG)
         }
     }
 
