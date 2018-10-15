@@ -19,7 +19,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="?attr/actionBarSize"
 		android:layout_gravity="bottom"
-		app:backgroundTint="@color/colorPrimary"
+		app:backgroundTint="@color/appbar_online"
 		app:fabCradleRoundedCornerRadius="24dp"
 		app:navigationIcon="@drawable/ic_menu_white_24dp"
 		/>

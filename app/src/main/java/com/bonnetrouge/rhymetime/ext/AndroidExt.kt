@@ -2,9 +2,15 @@ package com.bonnetrouge.rhymetime.ext
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
+import android.content.Context
+import android.content.res.ColorStateList
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import android.support.design.bottomappbar.BottomAppBar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
@@ -50,6 +56,12 @@ fun View.invisible() {
 
 fun View.gone() {
     this.visibility = View.GONE
+}
+
+fun Activity.isNetworkAvailable(): Boolean {
+    val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+    return activeNetwork?.isConnectedOrConnecting == true
 }
 
 fun ValueAnimator.doOnEnd(action: () -> Unit) {

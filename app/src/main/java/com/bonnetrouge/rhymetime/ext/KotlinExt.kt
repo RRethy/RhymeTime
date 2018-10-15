@@ -1,7 +1,7 @@
 package com.bonnetrouge.rhymetime.ext
 
-import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.CoroutineDispatcher
+import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 
 /**
@@ -16,7 +16,7 @@ val bgPool: CoroutineDispatcher by lazy {
     val numProcessors = Runtime.getRuntime().availableProcessors()
     when {
         numProcessors <= 2 -> newFixedThreadPoolContext(2, "background")
-        else -> CommonPool
+        else -> Dispatchers.Default
     }
 }
 

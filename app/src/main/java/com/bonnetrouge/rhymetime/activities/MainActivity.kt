@@ -1,13 +1,18 @@
 package com.bonnetrouge.rhymetime.activities
 
 import android.animation.ValueAnimator
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.res.ColorStateList
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import com.bonnetrouge.rhymetime.R
-import com.bonnetrouge.rhymetime.ext.doOnEnd
-import com.bonnetrouge.rhymetime.ext.fragmentTransaction
-import com.bonnetrouge.rhymetime.ext.lazyAndroid
+import com.bonnetrouge.rhymetime.ext.*
 import com.bonnetrouge.rhymetime.fragments.ChallengeFragment
 import com.bonnetrouge.rhymetime.fragments.FavoritesFragment
 import com.bonnetrouge.rhymetime.fragments.SandboxFragment
@@ -17,12 +22,22 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : DaggerAppCompatActivity() {
 
-    private val challengeFragment by lazyAndroid { ChallengeFragment.getInstance() }
-    private val sandboxFragment by lazyAndroid { SandboxFragment.getInstance() }
     private val searchFragment by lazyAndroid { SearchFragment.getInstance() }
     private val favoritesFragment by lazyAndroid { FavoritesFragment.getInstance() }
 
     private var showingBackButton = false
+
+    private val connectivityReceiver by lazyAndroid {
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (isNetworkAvailable()) {
+                    appBar.backgroundTint = ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity, R.color.appbar_online))
+                } else {
+                    appBar.backgroundTint = ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity, R.color.appbar_offline))
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +53,22 @@ class MainActivity : DaggerAppCompatActivity() {
             hideBackButton()
         }
         setupBottomDrawer()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        try {
+            registerReceiver(connectivityReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        } catch (e: Exception) {
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        try {
+            unregisterReceiver(connectivityReceiver)
+        } catch (e: Exception) {
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -61,9 +92,7 @@ class MainActivity : DaggerAppCompatActivity() {
         }
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-//                R.id.menu_challenges -> prettySwapFragment(challengeFragment, ChallengeFragment.TAG)
                 R.id.menu_search -> prettySwapFragment(searchFragment, SearchFragment.TAG)
-//                R.id.menu_sandbox -> prettySwapFragment(sandboxFragment, SandboxFragment.TAG)
                 R.id.menu_favorites -> prettySwapFragment(favoritesFragment, FavoritesFragment.TAG)
             }
             BottomSheetBehavior.from(bottomDrawer).state = BottomSheetBehavior.STATE_HIDDEN
