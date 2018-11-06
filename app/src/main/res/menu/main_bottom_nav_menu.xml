@@ -12,8 +12,8 @@
 		<!--android:id="@+id/menu_challenges"-->
 		<!--android:title="@string/challenges"-->
 		<!--/>-->
-	<!--<item-->
-		<!--android:id="@+id/menu_sandbox"-->
-		<!--android:title="@string/sandbox"-->
-		<!--/>-->
+	<item
+		android:id="@+id/menu_sandbox"
+		android:title="@string/sandbox"
+		/>
 </menu>

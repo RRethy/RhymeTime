@@ -24,6 +24,7 @@ class MainActivity : DaggerAppCompatActivity() {
 
     private val searchFragment by lazyAndroid { SearchFragment.getInstance() }
     private val favoritesFragment by lazyAndroid { FavoritesFragment.getInstance() }
+    private val sandboxFragment by lazyAndroid { SandboxFragment.getInstance() }
 
     private var showingBackButton = false
 
@@ -89,6 +90,7 @@ class MainActivity : DaggerAppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_search -> prettySwapFragment(searchFragment, SearchFragment.TAG)
                 R.id.menu_favorites -> prettySwapFragment(favoritesFragment, FavoritesFragment.TAG)
+                R.id.menu_sandbox -> prettySwapFragment(sandboxFragment, SandboxFragment.TAG)
             }
             BottomSheetBehavior.from(bottomDrawer).state = BottomSheetBehavior.STATE_HIDDEN
             true

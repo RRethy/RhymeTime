@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.bonnetrouge.rhymetime.commons.ViewModelFactory
 import com.bonnetrouge.rhymetime.di.ViewModelKey
 import com.bonnetrouge.rhymetime.viewmodels.FavoritesViewModel
+import com.bonnetrouge.rhymetime.viewmodels.SandboxViewModel
 import com.bonnetrouge.rhymetime.viewmodels.SearchViewModel
 import com.bonnetrouge.rhymetime.viewmodels.SingleWordViewModel
 import dagger.Binds
@@ -30,4 +31,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FavoritesViewModel::class)
     abstract fun bindFavoritesViewModel(favoritesViewModel: FavoritesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SandboxViewModel::class)
+    abstract fun bindSandboxViewModel(sandboxViewModel: SandboxViewModel): ViewModel
 }
