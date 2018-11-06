@@ -33,7 +33,7 @@ class AddNoteFragment : DaggerFragment(), RVClickListener<String> {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         addNoteViewModel.getWordRhymes("you").observe(this) {
-            rhymesAdapter.submitList(it?.toLists())
+            rhymesAdapter.submitList(it)
         }
         return inflater.inflate(R.layout.fragment_add_node, container, false)
     }
