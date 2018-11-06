@@ -3,7 +3,7 @@
 	<solid android:color="@color/transparent"/>
 	<stroke
 		android:width="2dp"
-		android:color="@color/sandbox_rhymes"
+		android:color="@color/new_note_rhymes"
 		/>
 	<corners
 		android:topLeftRadius="12dp"

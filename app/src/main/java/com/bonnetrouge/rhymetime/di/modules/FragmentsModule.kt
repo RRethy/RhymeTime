@@ -25,7 +25,7 @@ abstract class FragmentsModule {
 
     @Binds
     @IntoMap
-    @FragmentKey(SandboxFragment::class)
+    @FragmentKey(AddNoteFragment::class)
     abstract fun bindSandboxFragmentInjectorFactory(builder: SandboxFragmentSubcomponent.Builder):
             AndroidInjector.Factory<out android.support.v4.app.Fragment>
 

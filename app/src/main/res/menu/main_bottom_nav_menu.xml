@@ -13,7 +13,7 @@
 		<!--android:title="@string/challenges"-->
 		<!--/>-->
 	<item
-		android:id="@+id/menu_sandbox"
-		android:title="@string/sandbox"
+		android:id="@+id/menu_notes"
+		android:title="@string/notes"
 		/>
 </menu>

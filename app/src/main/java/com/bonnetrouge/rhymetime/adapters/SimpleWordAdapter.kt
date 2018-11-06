@@ -13,7 +13,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.view_holder_simple_word.*
 
 class SimpleWordAdapter constructor(
-        val textBg: Int, val clickListener: RVClickListener<String>
+        var textBg: Int?, val clickListener: RVClickListener<String>
 ) : ListAdapter<String, SimpleWordAdapter.SimpleWord>(stringDiffCallback) {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SimpleWord {
@@ -27,11 +27,11 @@ class SimpleWordAdapter constructor(
     inner class SimpleWord(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
         init {
-            containerView.background = ContextCompat.getDrawable(containerView.context, textBg)
             containerView.setOnClickListener { clickListener.onItemClick(getItem(adapterPosition), adapterPosition) }
         }
 
         fun bind() {
+            textBg?.let { containerView.background = ContextCompat.getDrawable(containerView.context, textBg!!) }
             wordText.text = getItem(adapterPosition)
         }
     }

@@ -80,3 +80,9 @@ fun ValueAnimator.doOnEnd(action: () -> Unit) {
         }
     })
 }
+
+fun <T> getListDiffer() = object : DiffUtil.ItemCallback<List<T>>() {
+    override fun areItemsTheSame(s1: List<T>, s2: List<T>) = s1 == s2
+
+    override fun areContentsTheSame(s1: List<T>, s2: List<T>) = true
+}

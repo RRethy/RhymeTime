@@ -5,8 +5,8 @@ import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
 @Subcomponent()
-interface SandboxFragmentSubcomponent : AndroidInjector<SandboxFragment> {
-    @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<SandboxFragment>()
+interface SandboxFragmentSubcomponent : AndroidInjector<AddNoteFragment> {
+    @Subcomponent.Builder abstract class Builder : AndroidInjector.Builder<AddNoteFragment>()
 }
 
 @Subcomponent()
