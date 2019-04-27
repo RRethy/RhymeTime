@@ -6,8 +6,8 @@ import com.bonnetrouge.rhymetime.ext.bgPool
 import com.bonnetrouge.rhymetime.models.WordFavorite
 import com.bonnetrouge.rhymetime.repositories.UserInfoRepo
 import com.bonnetrouge.rhymetime.room.daos.FavoritesDao
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -9,8 +9,8 @@ import com.bonnetrouge.rhymetime.models.WordRhymes
 import com.bonnetrouge.rhymetime.repositories.DatamuseRepo
 import com.bonnetrouge.rhymetime.room.daos.WordsInfoDao
 import com.bonnetrouge.rhymetime.services.DatamuseService
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

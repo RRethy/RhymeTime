@@ -14,7 +14,6 @@ import android.support.v4.content.ContextCompat
 import com.bonnetrouge.rhymetime.R
 import com.bonnetrouge.rhymetime.ext.*
 import com.bonnetrouge.rhymetime.fragments.FavoritesFragment
-import com.bonnetrouge.rhymetime.fragments.AddNoteFragment
 import com.bonnetrouge.rhymetime.fragments.SearchFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,7 +22,6 @@ class MainActivity : DaggerAppCompatActivity() {
 
     private val searchFragment by lazyAndroid { SearchFragment.getInstance() }
     private val favoritesFragment by lazyAndroid { FavoritesFragment.getInstance() }
-    private val notesFragment by lazyAndroid { AddNoteFragment.getInstance() }
 
     private var showingBackButton = false
 
@@ -89,7 +87,6 @@ class MainActivity : DaggerAppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_search -> prettySwapFragment(searchFragment, SearchFragment.TAG)
                 R.id.menu_favorites -> prettySwapFragment(favoritesFragment, FavoritesFragment.TAG)
-                R.id.menu_notes -> prettySwapFragment(notesFragment, AddNoteFragment.TAG)
             }
             BottomSheetBehavior.from(bottomDrawer).state = BottomSheetBehavior.STATE_HIDDEN
             true

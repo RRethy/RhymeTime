@@ -9,26 +9,11 @@ import dagger.android.support.FragmentKey
 import dagger.multibindings.IntoMap
 
 @Module(subcomponents = [
-    ChallengeFragmentSubcomponent::class,
-    SandboxFragmentSubcomponent::class,
     SearchFragmentSubcomponent::class,
     SingleWordSubcomponent::class,
     FavoritesSubcomponent::class
 ])
 abstract class FragmentsModule {
-    @Binds
-    @IntoMap
-    @FragmentKey(ChallengeFragment::class)
-    abstract fun bindChallengeFragmentInjectorFactory(builder: ChallengeFragmentSubcomponent.Builder):
-            AndroidInjector.Factory<out android.support.v4.app.Fragment>
-
-
-    @Binds
-    @IntoMap
-    @FragmentKey(AddNoteFragment::class)
-    abstract fun bindSandboxFragmentInjectorFactory(builder: SandboxFragmentSubcomponent.Builder):
-            AndroidInjector.Factory<out android.support.v4.app.Fragment>
-
     @Binds
     @IntoMap
     @FragmentKey(SearchFragment::class)

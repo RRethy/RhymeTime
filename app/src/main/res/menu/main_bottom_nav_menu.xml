@@ -8,12 +8,4 @@
 		android:id="@+id/menu_favorites"
 		android:title="@string/favorites"
 		/>
-	<!--<item-->
-		<!--android:id="@+id/menu_challenges"-->
-		<!--android:title="@string/challenges"-->
-		<!--/>-->
-	<item
-		android:id="@+id/menu_notes"
-		android:title="@string/notes"
-		/>
 </menu>
